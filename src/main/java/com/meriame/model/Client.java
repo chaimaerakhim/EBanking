@@ -74,5 +74,9 @@ public class Client extends User implements Serializable {
 	public void setComptes(List<Compte> comptes) {
 		this.comptes = comptes;
 	}
+	
+	public Client(String username, String password) {
+		super(username, password);
+	}
 
 }

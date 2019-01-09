@@ -31,6 +31,11 @@ public class User implements Serializable {
 	
 	
 	
+	public User(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
 	public User(String cin, String nom, String prenom, String adresse, String telephone, String email, String username,
 			String password, Date datedenaissance) {
 		super();

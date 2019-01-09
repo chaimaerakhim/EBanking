@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -27,18 +28,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
-		
+		http.formLogin();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		.and()
 			.authorizeRequests()
-			.antMatchers("/services/**").permitAll()
+			.antMatchers("/services/**", "/login/**").permitAll()
 			.antMatchers("/clients/**").hasAuthority("CLIENT")
 			.antMatchers("/Agent/**").hasAuthority("AGENT")
-			.anyRequest().authenticated();
-		
-	//	http.sess
-		//http.authorizeRequests().antMatchers("/appUsers/**", "/appRoles/**").hasAuthority("ADMIN");
-		http.authorizeRequests().anyRequest().authenticated();
+			.anyRequest().authenticated()
+		.and()
+		.addFilter(new JWTAuthenticationFilter(authenticationManager()))
+		.addFilterBefore(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+
 	}
 
 }

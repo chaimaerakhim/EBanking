@@ -43,7 +43,11 @@
 			<artifactId>cxf-rt-features-logging</artifactId>
 			<version>3.1.12</version>
 		</dependency>
-		
+		<dependency>
+		    <groupId>io.jsonwebtoken</groupId>
+		    <artifactId>jjwt</artifactId>
+		    <version>0.2</version>
+		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
