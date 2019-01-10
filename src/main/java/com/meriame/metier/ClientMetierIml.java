@@ -23,11 +23,29 @@ public class ClientMetierIml implements ClientMetier {
 		c.setPassword(hashPW);
 		return clientRepository.save(c);
 	}
-
 	@Override
-	public List<Client> ListClent() {
-		// TODO Auto-generated method stub
+	public Client editClient(Client client){
+		return clientRepository.save(client);
+	}
+	@Override
+	public List<Client> getAllClients(){
 		return clientRepository.findAll();
 	}
+	@Override
+	public Client getClientbyId(long id_client)
+	{
+		Client client =clientRepository.findById(id_client);
+		return client;
+		
+	}
+	
+	@Override
+	public void deleteClientbyId(long id_client)
+	{
+		Client client=getClientbyId(id_client);
+		clientRepository.delete(client);
+		
+	}
+	
 
 }

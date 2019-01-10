@@ -7,5 +7,8 @@ import com.meriame.model.Client;
 public interface ClientMetier {
 
 	public Client SaveClient(Client c);
-	public List<Client> ListClent();
+	public Client editClient(Client client);
+	public List<Client> getAllClients();
+	public Client getClientbyId(long id_client);
+	public void deleteClientbyId(long id_client);
 }

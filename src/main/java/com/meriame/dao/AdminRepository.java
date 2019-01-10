@@ -9,5 +9,6 @@ import com.meriame.model.Admin;
 public interface AdminRepository extends JpaRepository<Admin, Long> {
 	
 	public Admin findByUsername(String username);
+	public Admin findAdminById(long id);
 	
 }

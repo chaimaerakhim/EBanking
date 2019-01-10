@@ -6,4 +6,5 @@ import com.meriame.model.Agence;
 
 public interface AgenceRepository extends JpaRepository<Agence, Long> {
 
+
 }

@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.meriame.dto.AdminDTO;
 
 
@@ -21,6 +22,7 @@ import com.meriame.dto.AdminDTO;
 public class Admin extends User implements Serializable {
 	
 	@OneToMany(mappedBy="admin", fetch=FetchType.LAZY)
+	@JsonManagedReference(value="adminAgent")
 	private List<Agent> agents;
 	@OneToMany(mappedBy="admin", fetch=FetchType.LAZY)
 	private List<Agence> agences;
