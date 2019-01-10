@@ -15,8 +15,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="Versement")
 @Entity
 public class Versement {
 
@@ -25,10 +23,10 @@ public class Versement {
 	private int id;
 	
 	@ManyToOne
-	@JsonBackReference(value="compteVersementSour")
+	@JsonBackReference(value="versementsourCompte")
 	private Compte cmptSource;
 	@ManyToOne
-    @JsonBackReference(value="compteVersementDest")
+    @JsonBackReference(value="versementdestCompte")
 	private Compte cmptDestination;
 	
 	@Temporal(TemporalType.TIMESTAMP)

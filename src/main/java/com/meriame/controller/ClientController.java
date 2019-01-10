@@ -57,7 +57,7 @@ public class ClientController {
 		List<Versement> virements = new ArrayList<>();
 		
 		comptes.forEach(c -> {
-			virements.addAll(c.getVersementSour());
+			virements.addAll(c.getVersementsour());
 			virements.addAll(c.getVersementDest());
 			
 		});

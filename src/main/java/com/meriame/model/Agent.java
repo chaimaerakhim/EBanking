@@ -14,10 +14,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="Agent")
 public class Agent extends User implements Serializable {
 	
 	@ManyToOne
@@ -26,10 +25,11 @@ public class Agent extends User implements Serializable {
 	private Admin admin;
 	@ManyToOne
 	@JoinColumn(name="id_agence")
+	@JsonBackReference(value="agentsAgence")
 	private Agence agence;
 	
 	@OneToMany(mappedBy="agent", fetch=FetchType.LAZY)
-	@JsonBackReference(value="agentClient")
+	@JsonManagedReference(value="clientsAgent")
 	private List<Client> clients;
 
 	public Admin getAdmin() {

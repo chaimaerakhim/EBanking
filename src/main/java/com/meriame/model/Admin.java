@@ -17,14 +17,13 @@ import com.meriame.dto.AdminDTO;
 
 
 @Entity
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="Admin")
 public class Admin extends User implements Serializable {
 	
 	@OneToMany(mappedBy="admin", fetch=FetchType.LAZY)
 	@JsonManagedReference(value="adminAgent")
 	private List<Agent> agents;
 	@OneToMany(mappedBy="admin", fetch=FetchType.LAZY)
+	@JsonManagedReference(value="adminAgence")
 	private List<Agence> agences;
 	public List<Agent> getAgents() {
 		return agents;

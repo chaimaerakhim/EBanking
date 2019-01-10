@@ -12,8 +12,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @MappedSuperclass
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="User")
 public class User implements Serializable {
 	
 	@Id

@@ -16,9 +16,10 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="Agence")
 public class Agence implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -28,12 +29,15 @@ public class Agence implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="id_admin")
+	@JsonBackReference(value="adminAgence")
 	private Admin admin;
 	
 	@OneToMany(mappedBy="agence", fetch=FetchType.LAZY)
+	@JsonManagedReference(value="agentsAgence")
 	private List<Agent> agents;
 	
 	@OneToMany(mappedBy="agence", fetch=FetchType.LAZY)
+	@JsonManagedReference(value="clientsAgence")
 	private List<Client> clients;
 
 	public Long getId_agence() {

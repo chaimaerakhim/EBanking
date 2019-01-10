@@ -19,8 +19,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="Compte")
 public class Compte implements Serializable{
 	
 	@Id
@@ -30,13 +28,13 @@ public class Compte implements Serializable{
 	private String etat;
 	@ManyToOne
 	@JoinColumn(name="id_client")
-	@JsonBackReference(value="clientCompte")
+	@JsonBackReference(value="comptesClient")
 	private Client client;
 	@OneToMany(mappedBy="cmptSource")
-	@JsonManagedReference(value="compteVersementSour")
+	@JsonManagedReference(value="versementsourCompte")
 	private List<Versement> versementsour;
 	@OneToMany(mappedBy = "cmptDestination")
-    @JsonManagedReference(value="compteVersementDest")
+    @JsonManagedReference(value="versementdestCompte")
 	private List<Versement> versementdest;
 	
 	public int getIdCompte() {
@@ -64,13 +62,21 @@ public class Compte implements Serializable{
 		this.client = client;
 	}
 	
-	public List<Versement> getVersementSour() {
+
+	
+	
+	public List<Versement> getVersementsour() {
 		return versementsour;
 	}
-	public void setVersementSour(List<Versement> versementsour) {
+	public void setVersementsour(List<Versement> versementsour) {
 		this.versementsour = versementsour;
 	}
-	
+	public List<Versement> getVersementdest() {
+		return versementdest;
+	}
+	public void setVersementdest(List<Versement> versementdest) {
+		this.versementdest = versementdest;
+	}
 	public List<Versement> getVersementDest() {
 		return versementdest;
 	}

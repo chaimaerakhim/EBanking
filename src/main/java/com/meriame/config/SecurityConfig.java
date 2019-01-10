@@ -37,6 +37,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/Agent/**").hasAuthority("AGENT")
 			.anyRequest().authenticated()
 		.and()
+			.logout()
+			.logoutUrl("/logout.html")
+			.invalidateHttpSession(true)
+			.deleteCookies("JSESSIONID")
+		.and()
 		.addFilter(new JWTAuthenticationFilter(authenticationManager()))
 		.addFilterBefore(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 
