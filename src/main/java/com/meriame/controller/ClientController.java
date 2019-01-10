@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.meriame.dao.CompteRepository;
 import com.meriame.dao.VersementRepository;
+import com.meriame.dto.VersementDTO;
 import com.meriame.exception.BankTransactionException;
 import com.meriame.metier.ClientMetier;
 import com.meriame.metier.VersementMetier;
@@ -65,7 +66,7 @@ public class ClientController {
 	}
 	
 	@RequestMapping(value = "/clients/verser", method = RequestMethod.POST)
-	public String virement(@RequestBody  Versement virement) throws ParseException {
+	public String virement(@RequestBody  VersementDTO virement) throws ParseException {
 		
 		try {
 			versementmetier.verse(virement);

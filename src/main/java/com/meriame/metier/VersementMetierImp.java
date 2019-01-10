@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Propagation;
 
 import com.meriame.dao.CompteRepository;
 import com.meriame.dao.VersementRepository;
+import com.meriame.dto.VersementDTO;
 import com.meriame.exception.BankTransactionException;
 
 @Service
@@ -47,10 +48,28 @@ public class VersementMetierImp implements VersementMetier {
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW,rollbackFor = BankTransactionException.class)
-	public void verse(Versement V) throws BankTransactionException, ParseException {
+	public void verse(VersementDTO V) throws BankTransactionException, ParseException {
+		Compte compteSource = compteRepository.findByIdCompte(V.getCmptSource());
+		Compte compteDestination = compteRepository.findByIdCompte(V.getCmptDestination());
+		try {
+			addAmount(compteSource,-V.getMontant());
+			addAmount(compteDestination,V.getMontant());
+			DateFormat df = new SimpleDateFormat(datePattern);
+			Versement v = new Versement(compteSource, compteDestination,df.parse(df.format(Calendar.getInstance().getTime())),V.getMontant());
+			versementRepository.save(v);
+		} catch (BankTransactionException e) {
+			// TODO: handle exception
+			throw e;
+		}
 		
-		Compte compteSource = compteRepository.findByIdCompte(V.getCmptSource().getIdCompte());
-		Compte compteDestination = compteRepository.findByIdCompte(V.getCmptDestination().getIdCompte());
+	}
+
+	/*@Override
+	@Transactional(propagation = Propagation.REQUIRES_NEW,rollbackFor = BankTransactionException.class)
+	public void verse(VersementDTO V) throws BankTransactionException, ParseException {
+		
+		Compte compteSource = compteRepository.findByIdCompte(V.getCmptSource());
+		Compte compteDestination = compteRepository.findByIdCompte(V.getCmptDestination());
 		try {
 			addAmount(compteSource,-V.getMontant());
 			addAmount(compteDestination,V.getMontant());
@@ -65,5 +84,6 @@ public class VersementMetierImp implements VersementMetier {
 		
 		
 	}
+	*/
 
 }
