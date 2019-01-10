@@ -9,8 +9,8 @@ import com.meriame.model.Compte;
 
 
 
-public interface CompteRepository extends JpaRepository<Compte,  Integer>{
-	public Compte findByIdCompte(int id_compte);
+public interface CompteRepository extends JpaRepository<Compte,  Long>{
+	public Compte findByIdCompte(long id_compte);
 	
 	@Query("select c from Compte c where c.client.id = :id")
 	public List<Compte> findByClientId(@Param("id")long id);
