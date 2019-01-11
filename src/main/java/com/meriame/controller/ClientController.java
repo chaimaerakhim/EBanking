@@ -1,18 +1,13 @@
 package com.meriame.controller;
 
-import java.text.DateFormat;
+
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.meriame.dao.CompteRepository;
-import com.meriame.dao.VersementRepository;
 import com.meriame.dto.VersementDTO;
 import com.meriame.exception.BankTransactionException;
 import com.meriame.metier.ClientMetier;
+import com.meriame.metier.CompteMetier;
 import com.meriame.metier.VersementMetier;
 import com.meriame.model.Client;
 import com.meriame.model.Compte;
@@ -34,17 +29,15 @@ public class ClientController {
 	public static final String datePattern = "dd/MM/yyyy HH:mm:ss";
 	
 	@Autowired
-	private CompteRepository compteRepository;
+	private CompteMetier compteMetier;
 	@Autowired
 	private ClientMetier clientmetier;
-	@Autowired
-	private VersementRepository versementRepository;
 	@Autowired
 	private VersementMetier versementmetier;
 	
 	@RequestMapping(value = "/clients/{idClient}/mycomptes")
 	public List<Compte> myComptes(@PathVariable long idClient){
-		return compteRepository.findByClientId(idClient);
+		return compteMetier.getComptesByClientId(idClient);
 	}
 	@RequestMapping(value = "/clients/{idClient}/profil")
 	public Client profil(@PathVariable long idClient){
@@ -53,14 +46,16 @@ public class ClientController {
 	
 	@RequestMapping(value = "/clients/{idClient}/mes-virements")
 	public List<Versement> mesVirements(@PathVariable long idClient){
-		List<Compte> comptes = compteRepository.findByClientId(idClient);
+		List<Compte> comptes = compteMetier.getComptesByClientId(idClient);
 		List<Versement> virements = new ArrayList<>();
 		
-		comptes.forEach(c -> {
-			virements.addAll(c.getVersementsour());
-			virements.addAll(c.getVersementDest());
-			
-		});
+		if(comptes!=null) {
+			comptes.forEach(c -> {
+				if(c.getVersementsour()!=null)virements.addAll(c.getVersementsour());
+				if(c.getVersementDest()!=null)virements.addAll(c.getVersementDest());
+				
+			});
+		}
 		
 		return virements;
 	}

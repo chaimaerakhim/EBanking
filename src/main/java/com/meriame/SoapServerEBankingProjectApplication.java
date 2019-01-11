@@ -22,14 +22,11 @@ import com.meriame.model.Client;
 @SpringBootApplication
 @EnableWebMvc
 @ImportResource({ "classpath:webservice-definition-beans.xml" })
-@EnableJpaRepositories("com.meriame.dao")
-@ComponentScan({"com.meriame","com.meriame.controller"})
-public class SoapServerEBankingProjectApplication implements ApplicationRunner {
+//@EnableJpaRepositories(basePackages="com.meriame.dao", entityManagerFactoryRef="emf")
+@ComponentScan({"com.meriame","com.meriame.controller", "com.meriame.dao"})
+public class SoapServerEBankingProjectApplication  {
 
-	@Autowired
-	ClientRepository clientRepository;
-	@Autowired
-	ClientMetier clientMetier;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(SoapServerEBankingProjectApplication.class, args);
 	}
@@ -46,11 +43,7 @@ public class SoapServerEBankingProjectApplication implements ApplicationRunner {
 	
 	
 
-	@Override
-	public void run(ApplicationArguments args) throws Exception {
-		clientMetier.SaveClient(new Client("client","1234"));
-		
-	}
+
 	
 	
 
