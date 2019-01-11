@@ -40,11 +40,20 @@ public class ClientMetierIml implements ClientMetier {
 	}
 	
 	@Override
-	public void deleteClientbyId(long id_client)
+	public void deleteClientByCin(String cin)
 	{
-		Client client=getClientbyId(id_client);
+		Client client=findClientByCin(cin);
 		clientRepository.delete(client);
 		
+	}
+	@Override
+	public Client findClientByUsername(String username) {
+		return clientRepository.findByUsername(username);
+	}
+	@Override
+	public Client findClientByCin(String cin) {
+		// TODO Auto-generated method stub
+		return clientRepository.findByCin(cin);
 	}
 	
 

@@ -87,7 +87,7 @@ public class ClientMetierImlTest {
 	
 	@Test
 	public void deleteClientbyIdTest() throws Exception{
-		clientMetier.deleteClientbyId(1);
+//		clientMetier.deleteClientbyId(1);
 	}
 	
 }

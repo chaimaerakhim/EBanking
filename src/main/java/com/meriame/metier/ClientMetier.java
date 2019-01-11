@@ -10,5 +10,7 @@ public interface ClientMetier {
 	public Client editClient(Client client);
 	public List<Client> getAllClients();
 	public Client getClientbyId(long id_client);
-	public void deleteClientbyId(long id_client);
+	public Client findClientByUsername(String username);
+	public Client findClientByCin(String cin);
+	public void deleteClientByCin(String cin);
 }
