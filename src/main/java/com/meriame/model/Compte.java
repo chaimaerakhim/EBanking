@@ -23,7 +23,7 @@ public class Compte implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idCompte;
+	private long idCompte;
 	private double solde;
 	private String etat;
 	@ManyToOne
@@ -37,10 +37,10 @@ public class Compte implements Serializable{
     @JsonManagedReference(value="versementdestCompte")
 	private List<Versement> versementdest;
 	
-	public int getIdCompte() {
+	public Long getIdCompte() {
 		return idCompte;
 	}
-	public void setIdCompte(int idCompte) {
+	public void setIdCompte(Long idCompte) {
 		this.idCompte = idCompte;
 	}
 	public double getSolde() {
@@ -87,7 +87,7 @@ public class Compte implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Compte(int id,double solde, String etat, Client client) {
+	public Compte(long id,double solde, String etat, Client client) {
 		super();
 		this.idCompte=id;
 		this.solde = solde;

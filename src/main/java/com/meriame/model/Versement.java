@@ -20,7 +20,7 @@ public class Versement {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private long id;
 	
 	@ManyToOne
 	@JsonBackReference(value="versementsourCompte")
@@ -34,11 +34,11 @@ public class Versement {
 	
 	private double montant;
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
