@@ -24,10 +24,10 @@ public class VersementDTO {
 	
 	@ManyToOne
 	@JsonBackReference(value="compteVersementSour")
-	private int cmptSource;
+	private Long cmptSource;
 	@ManyToOne
     @JsonBackReference(value="compteVersementDest")
-	private int cmptDestination;
+	private Long cmptDestination;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateTransaction;
@@ -44,19 +44,19 @@ public class VersementDTO {
 
 	
 
-	public int getCmptSource() {
+	public Long getCmptSource() {
 		return cmptSource;
 	}
 
-	public void setCmptSource(int cmptSource) {
+	public void setCmptSource(Long cmptSource) {
 		this.cmptSource = cmptSource;
 	}
 
-	public int getCmptDestination() {
+	public Long getCmptDestination() {
 		return cmptDestination;
 	}
 
-	public void setCmptDestination(int cmptDestination) {
+	public void setCmptDestination(Long cmptDestination) {
 		this.cmptDestination = cmptDestination;
 	}
 

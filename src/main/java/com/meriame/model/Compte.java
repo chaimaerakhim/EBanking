@@ -77,12 +77,6 @@ public class Compte implements Serializable{
 	public void setVersementdest(List<Versement> versementdest) {
 		this.versementdest = versementdest;
 	}
-	public List<Versement> getVersementDest() {
-		return versementdest;
-	}
-	public void setVersementDest(List<Versement> versementdest) {
-		this.versementdest = versementdest;
-	}
 	public Compte() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -90,6 +84,12 @@ public class Compte implements Serializable{
 	public Compte(long id,double solde, String etat, Client client) {
 		super();
 		this.idCompte=id;
+		this.solde = solde;
+		this.etat = etat;
+		this.client = client;
+	}
+	public Compte(double solde, String etat, Client client) {
+		super();
 		this.solde = solde;
 		this.etat = etat;
 		this.client = client;

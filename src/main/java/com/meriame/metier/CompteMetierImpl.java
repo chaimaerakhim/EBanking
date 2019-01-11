@@ -19,4 +19,22 @@ public class CompteMetierImpl implements CompteMetier{
 		return compteRepository.findByClientId(id);
 	}
 
+	@Override
+	public Compte saveCompte(Compte compte) {
+		
+		return compteRepository.save(compte);
+	}
+
+	@Override
+	public Compte getCompteById(Long id) {
+		// TODO Auto-generated method stub
+		return compteRepository.findByIdCompte(id);
+	}
+
+	@Override
+	public void deleteCompte(Compte compte) {
+		
+		compteRepository.delete(compte);
+	}
+
 }

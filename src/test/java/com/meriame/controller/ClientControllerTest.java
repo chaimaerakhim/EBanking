@@ -134,8 +134,8 @@ public class ClientControllerTest {
 	public void virementTestDone() throws Exception{
 		VersementDTO versement=new VersementDTO();
 		versement.setId(1);
-		versement.setCmptDestination(2);
-		versement.setCmptSource(1);
+		versement.setCmptDestination(2L);
+		versement.setCmptSource(1L);
 		versement.setDateTransaction(null);
 		versement.setMontant(10);
 		doNothing().when(versementmetier).verse(versement);
@@ -162,8 +162,8 @@ public class ClientControllerTest {
 //		thrown.expect(BankTransactionException.class);
 		VersementDTO versement=new VersementDTO();
 		versement.setId(1);
-		versement.setCmptDestination(2);
-		versement.setCmptSource(1);
+		versement.setCmptDestination(2L);
+		versement.setCmptSource(1L);
 		versement.setDateTransaction(null);
 		versement.setMontant(10);
 		doThrow(BankTransactionException.class).when(versementmetier).verse(versement);

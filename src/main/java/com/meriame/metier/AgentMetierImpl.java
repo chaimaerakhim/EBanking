@@ -18,4 +18,10 @@ public class AgentMetierImpl implements AgentMetier {
 		return agentRepository.findByUsername(username);
 	}
 
+	@Override
+	public Agent saveAgent(Agent agent) {
+		
+		return agentRepository.save(agent);
+	}
+
 }

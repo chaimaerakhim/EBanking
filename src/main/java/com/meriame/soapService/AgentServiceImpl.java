@@ -98,7 +98,11 @@ public class AgentServiceImpl implements AgentService {
 		
 		Client client=clientMetier.findClientByCin(cinClient);
 		if(client!=null) {
-			
+			Compte cmt=new Compte(compte.getSolde(), "active", client);
+			if(compteMetier.saveCompte(cmt)!=null) {
+				return true;
+			}
+						
 		}
 		
 		return false;
@@ -106,33 +110,69 @@ public class AgentServiceImpl implements AgentService {
 
 	@Override
 	public boolean editCompte(CompteSOAP_DTO compte) {
-		// TODO Auto-generated method stub
+		Compte cmpt=compteMetier.getCompteById(compte.getIdCompte());
+		if(cmpt!=null) {
+			cmpt.setSolde(compte.getSolde());
+			cmpt.setEtat(compte.getEtat());
+			compteMetier.saveCompte(cmpt);
+			
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean deleteCompte(Long id) {
-		// TODO Auto-generated method stub
+		Compte cmpt=compteMetier.getCompteById(id);
+		if(cmpt!=null) {
+			compteMetier.deleteCompte(cmpt);
+		}
 		return false;
 	}
 
 	@Override
-	public List<CompteSOAP_DTO> getCompteClient(String username) {
-		// TODO Auto-generated method stub
+	public List<CompteSOAP_DTO> getCompteClient(String cin) {
+		Client client=clientMetier.findClientByCin(cin);
+		if(client!=null) {
+			if(client.getComptes()!=null) {
+				List<CompteSOAP_DTO> listCompte=new Vector<>();
+				client.getComptes().forEach(c->{
+					listCompte.add(new CompteSOAP_DTO(c.getIdCompte(), c.getSolde(), c.getEtat()));
+				});
+			}
+		}
 		return null;
 	}
+	
+	
 	
 	//*******************************Profile********************************
 
 	@Override
 	public AgentSOAP_DTO getProfilAgent(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		Agent agent=agentMetier.findAgentByUsername(username);
+		AgentSOAP_DTO ag=null;
+		if(agent!=null) {
+			ag=new AgentSOAP_DTO(agent.getNom(), agent.getPrenom(), agent.getAdresse(), agent.getAdresse(), agent.getEmail(), username, agent.getPassword(), agent.getDatedenaissance(), agent.getCin());
+		}
+		return ag;
 	}
 
 	@Override
 	public boolean updateAgent(AgentSOAP_DTO agent, String username) {
-		// TODO Auto-generated method stub
+		Agent ag=agentMetier.findAgentByUsername(username);
+		if(ag!=null) {
+			ag.setAdresse(agent.getAdresse());
+			ag.setCin(agent.getCin());
+			ag.setDatedenaissance(agent.getDatedenaissance());
+			ag.setEmail(agent.getEmail());
+			ag.setNom(agent.getNom());
+			ag.setPassword(agent.getPassword());
+			ag.setPrenom(agent.getPrenom());
+			ag.setTelephone(agent.getTelephone());
+			if(agentMetier.saveAgent(ag)!=null)
+				return true;
+		}
 		return false;
 	}
 

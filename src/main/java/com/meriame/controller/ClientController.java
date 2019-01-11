@@ -52,7 +52,7 @@ public class ClientController {
 		if(comptes!=null) {
 			comptes.forEach(c -> {
 				if(c.getVersementsour()!=null)virements.addAll(c.getVersementsour());
-				if(c.getVersementDest()!=null)virements.addAll(c.getVersementDest());
+				if(c.getVersementdest()!=null)virements.addAll(c.getVersementdest());
 				
 			});
 		}
