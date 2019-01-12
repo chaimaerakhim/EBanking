@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Agence implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id_agence;
+	private Long id;
 	private String adresse;
 	private Date datedouverture;
 	
@@ -40,12 +40,14 @@ public class Agence implements Serializable{
 	@JsonManagedReference(value="clientsAgence")
 	private List<Client> clients;
 
-	public Long getId_agence() {
-		return id_agence;
+	
+
+	public Long getId() {
+		return id;
 	}
 
-	public void setId_agence(Long id_agence) {
-		this.id_agence = id_agence;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getAdresse() {

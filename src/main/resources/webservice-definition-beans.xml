@@ -23,4 +23,13 @@
 		</jaxws:features>
 	</jaxws:endpoint>
 	
+	<jaxws:endpoint 
+		id="AdminService" 
+		implementor="#adminServiceImpl"
+		address="/AdminService">
+		<jaxws:features>
+			<bean class="org.apache.cxf.ext.logging.LoggingFeature"></bean>
+		</jaxws:features>
+	</jaxws:endpoint>
+	
 </beans>
