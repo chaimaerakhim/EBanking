@@ -20,9 +20,6 @@ import com.meriame.service.AdminServiceImp;
 @Configuration
 public class CXFConfig {
 
-	@Autowired
-	AdminServiceImp adminServiceImp;
-	
 	
 	
     @Bean(name=Bus.DEFAULT_BUS_ID)
@@ -33,14 +30,7 @@ public class CXFConfig {
     	return springBus;
     }	
     
-    @Bean
-    public Endpoint endpoint() {
-    		
-        EndpointImpl endpoint = new EndpointImpl(springBus(), adminServiceImp);
-        endpoint.getFeatures().add(new LoggingFeature());
-        endpoint.publish("/AdminService");
-        return endpoint;
-    }
+ 
     
     
 }
