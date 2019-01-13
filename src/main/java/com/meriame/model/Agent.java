@@ -28,7 +28,7 @@ public class Agent extends User implements Serializable {
 	@JsonBackReference(value="agentsAgence")
 	private Agence agence;
 	
-	@OneToMany(mappedBy="agent", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="agent", fetch=FetchType.EAGER)
 	@JsonManagedReference(value="clientsAgent")
 	private List<Client> clients;
 

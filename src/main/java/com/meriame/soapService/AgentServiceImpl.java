@@ -32,7 +32,7 @@ public class AgentServiceImpl implements AgentService {
 		 
 		Agent agent=agentMetier.findAgentByUsername(username);
 		if(agent!=null) {
-			if(agent.getUsername().equals(password)) return true;
+			if(agent.getUsername().equals(username) && agent.getPassword().equals(password) ) return true;
 		}
 		
 		
@@ -63,6 +63,20 @@ public class AgentServiceImpl implements AgentService {
 			Agent agent=agentMetier.findAgentByUsername(usernameAgent);
 			List<Compte> compts=new Vector<>();
 			client=new Client(c.getCin(), c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(), c.getUsername(), c.getPassword(), c.getDatedenaissance(), agent, agent.getAgence(), new Date(), compts);
+			/*client.setCin(c.getCin());
+			client.setNom(c.getNom());
+			client.setPrenom(c.getPrenom());
+			client.setAdresse(c.getAdresse());
+			client.setTelephone(c.getTelephone());
+			client.setEmail( c.getEmail());
+			client.setUsername(c.getUsername());
+			client.setPassword(c.getPassword());
+			client.setDatedenaissance(c.getDatedenaissance());
+			client.setAgent(agent);
+			client.setAgence(agent.getAgence());
+			client.setAdhesionDate(client.getAdhesionDate());
+			client.setComptes(compts);*/
+			
 			clientMetier.SaveClient(client);
 			clientdto=c;
 		}
@@ -129,25 +143,40 @@ public class AgentServiceImpl implements AgentService {
 		Compte cmpt=compteMetier.getCompteById(id);
 		if(cmpt!=null) {
 			compteMetier.deleteCompte(cmpt);
+			return true;
 		}
-		return false;
+		else return false;
 	}
 
 	@Override
 	public List<CompteSOAP_DTO> getCompteClient(String cin) {
 		Client client=clientMetier.findClientByCin(cin);
+		List<CompteSOAP_DTO> listCompte=new Vector<>();
 		if(client!=null) {
 			if(client.getComptes()!=null) {
-				List<CompteSOAP_DTO> listCompte=new Vector<>();
+				
+				
 				client.getComptes().forEach(c->{
 					listCompte.add(new CompteSOAP_DTO(c.getIdCompte(), c.getSolde(), c.getEtat()));
+				System.out.println(listCompte);
 				});
 			}
 		}
-		return null;
+		return listCompte;
 	}
 	
-	
+	@Override
+	public boolean activateCompte(Long id) {
+		Compte cmpt=compteMetier.getCompteById(id);
+		if (cmpt!=null) {
+			cmpt.setEtat("active");
+			if(compteMetier.saveCompte(cmpt)!=null) {
+				return true;
+				}
+		}
+		
+		return false;
+	}
 	
 	//*******************************Profile********************************
 
@@ -178,6 +207,8 @@ public class AgentServiceImpl implements AgentService {
 		}
 		return false;
 	}
+
+	
 
 	
 }
