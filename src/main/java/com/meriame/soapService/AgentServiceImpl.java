@@ -31,12 +31,16 @@ public class AgentServiceImpl implements AgentService {
 	public boolean agentLogin(String username, String password) {
 		 
 		Agent agent=agentMetier.findAgentByUsername(username);
+<<<<<<< HEAD
 		System.out.println(username+" "+password);
 		if(agent!=null) {
 			if(agent.getPassword().equals(password)) return true;
 			System.out.println("bad password"+agent.getPassword());
 		}
 		System.out.println("Agent not found");
+=======
+		if(agent.getUsername().equals(password)) return true;
+>>>>>>> 9a46c9513730445af1edfc8436498141b8a4b365
 		
 		return false;
 	}
