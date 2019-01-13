@@ -33,7 +33,7 @@ public class AdminServiceImpl implements AdminService  {
 	public boolean AdminLogin(String username, String password) {
 		
 		Admin admin=adminMetier.findAdminByUsername(username);
-		if(admin.getUsername().equals(password)) return true;
+		if(admin.getPassword().equals(password)) return true;
 		
 		return false;
 	}
