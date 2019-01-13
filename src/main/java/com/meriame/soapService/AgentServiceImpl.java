@@ -179,6 +179,18 @@ public class AgentServiceImpl implements AgentService {
 		
 		return false;
 	}
+	@Override
+	public boolean desactivateCompte(Long id) {
+		Compte cmpt=compteMetier.getCompteById(id);
+		if (cmpt!=null) {
+			cmpt.setEtat("desactive");
+			if(compteMetier.saveCompte(cmpt)!=null) {
+				return true;
+				}
+		}
+		
+		return false;
+	}
 	
 	//*******************************Profile********************************
 

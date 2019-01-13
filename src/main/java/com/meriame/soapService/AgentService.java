@@ -23,6 +23,7 @@ public interface AgentService {
 	public boolean deleteCompte(Long id);
 	public List<CompteSOAP_DTO> getCompteClient(String cin);
 	public boolean activateCompte(Long id);
+	public boolean desactivateCompte(Long id);
 	//******Agent********
 	public AgentSOAP_DTO getProfilAgent(String username);
 	public boolean updateAgent(AgentSOAP_DTO agent, String username);
