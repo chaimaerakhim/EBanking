@@ -199,7 +199,7 @@ public class AgentServiceImpl implements AgentService {
 		Agent agent=agentMetier.findAgentByUsername(username);
 		AgentSOAP_DTO ag=null;
 		if(agent!=null) {
-			ag=new AgentSOAP_DTO(agent.getNom(), agent.getPrenom(), agent.getAdresse(), agent.getAdresse(), agent.getEmail(), username, agent.getPassword(), agent.getDatedenaissance(), agent.getCin());
+			ag=new AgentSOAP_DTO(agent.getNom(), agent.getPrenom(), agent.getAdresse(), agent.getTelephone(), agent.getEmail(), username, agent.getPassword(), agent.getDatedenaissance(), agent.getCin());
 		}
 		return ag;
 	}
@@ -220,6 +220,21 @@ public class AgentServiceImpl implements AgentService {
 				return true;
 		}
 		return false;
+	}
+
+	@Override
+	public ClientSOAP_DTO getclient(String cin) {
+		Client c=clientMetier.findClientByCin(cin);
+		ClientSOAP_DTO client=new ClientSOAP_DTO(c.getNom(), c.getPrenom(), c.getAdresse(), c.getTelephone(), c.getEmail(), c.getUsername(), c.getPassword(), c.getDatedenaissance(), c.getCin());
+		return client;
+	}
+
+	@Override
+	public CompteSOAP_DTO getCompte(Long id) {
+		Compte c=compteMetier.getCompteById(id);
+		CompteSOAP_DTO cmpt	=new CompteSOAP_DTO(c.getIdCompte(), c.getSolde(), c.getEtat());
+		
+		return cmpt;
 	}
 
 	

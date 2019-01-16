@@ -17,6 +17,7 @@ public interface AgentService {
 	public ClientSOAP_DTO editClient(ClientSOAP_DTO c, String usernameAgent);
 	public boolean deleteClient(String username);
 	public List<ClientSOAP_DTO> getClients(String usernameAgent);
+	public ClientSOAP_DTO getclient(String cin);
 	//******Compte*******
 	public boolean addCompte(CompteSOAP_DTO compte, String cinClient);
 	public boolean editCompte(CompteSOAP_DTO compte);
@@ -24,6 +25,7 @@ public interface AgentService {
 	public List<CompteSOAP_DTO> getCompteClient(String cin);
 	public boolean activateCompte(Long id);
 	public boolean desactivateCompte(Long id);
+	public CompteSOAP_DTO getCompte(Long id);
 	//******Agent********
 	public AgentSOAP_DTO getProfilAgent(String username);
 	public boolean updateAgent(AgentSOAP_DTO agent, String username);
